@@ -121,7 +121,6 @@ public class Main {
                 break;
             }
         }
-
         if (value == -1d) {
             value = Double.parseDouble(word);
         }
