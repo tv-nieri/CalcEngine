@@ -1,10 +1,29 @@
 package br.com.tvn.calcengine;
 
 public class MathEquation {
-    double leftVal;
-    double rightVal;
-    char opCode;
-    double result;
+    private double leftVal;
+    private double rightVal;
+    private char opCode;
+    private double result;
+
+    private static int numberOfCalculations;
+    private static double sumOfResults;
+
+    static {
+        System.out.println("Creating a MathEquation instance...");
+    }
+
+    public MathEquation(){}
+
+    public MathEquation(char opCode) {
+        this.opCode = opCode;
+    }
+
+    public MathEquation(char opCode, double leftVal, double rightVal) {
+        this(opCode);
+        this.leftVal = leftVal;
+        this.rightVal = rightVal;
+    }
 
     public double getLeftVal() {
         return leftVal;
@@ -57,6 +76,12 @@ public class MathEquation {
                 result = 0.0d;
                 break;
         }
+
+        numberOfCalculations++;
+        sumOfResults += result;
     }
 
+    public static double getAverageResult() {
+        return sumOfResults / numberOfCalculations;
+    }
 }
