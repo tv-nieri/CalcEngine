@@ -1,5 +1,10 @@
 package br.com.tvn.calcengine;
 
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
+import java.util.Locale;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         //performCalculations();
@@ -8,6 +13,26 @@ public class Main {
 
         Adder adder = new Adder();
         doCalculation(adder, 25.0, 92.0);
+
+        executeInteractively();
+    }
+
+    static void executeInteractively() {
+        System.out.println("Enter an operation and two numbers:");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        String[] parts = userInput.split(" ");
+        performOperations(parts);
+    }
+
+    private static void performOperations(String[] parts) {
+        MathOperation operation = MathOperation.valueOf(parts[0].toUpperCase());
+        double leftVal = Double.parseDouble(parts[1]);
+        double rightVal = Double.parseDouble(parts[2]);
+        CalculateBase calculation = createCalculation(operation, leftVal, rightVal);
+        calculation.calculate();
+        System.out.println("Operation performed: " + operation);
+        System.out.println(calculation.getResult());
     }
 
     private static CalculateBase createCalculation(MathOperation operation, double leftVal, double rightVal) {
