@@ -10,6 +10,26 @@ public class Main {
         doCalculation(adder, 25.0, 92.0);
     }
 
+    private static CalculateBase createCalculation(MathOperation operation, double leftVal, double rightVal) {
+        CalculateBase calculation = null;
+        switch (operation) {
+            case ADD:
+                calculation = new Adder(leftVal, rightVal);
+                break;
+            case SUBTRACT:
+                calculation = new Subtractor(leftVal, rightVal);
+                break;
+            case MULTIPLY:
+                calculation = new Multiplier(leftVal, rightVal);
+                break;
+            case DIVIDE:
+                calculation = new Divider(leftVal, rightVal);
+                break;
+        }
+
+        return calculation;
+    }
+
     static void doCalculation(CalculateBase calculation, double leftVal, double rightVal) {
         calculation.setLeftVal(leftVal);
         calculation.setRightVal(rightVal);
